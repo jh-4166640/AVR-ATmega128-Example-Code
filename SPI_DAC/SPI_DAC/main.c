@@ -32,7 +32,8 @@ static void sin_table_Init(void)
 	for(uint8_t i = 0;i<MAX_STEP;i++)
 	{
 		// sin() : -1~1 이므로 단극성 0~2로 올리기
-		sin_table[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX/2.0)); // 0 -> 0, 1 -> 4095/2, 2 -> 4095
+		sin_table[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX/2.0)); 
+		// 0 -> 0, 1 -> 4095/2, 2 -> 4095
 		angle+=step;
 	}
 }
@@ -93,7 +94,6 @@ ISR(TIMER0_COMP_vect)
 		MCP4921_SPI_Write(sin_table[COMP_cnt++]);
 		if(COMP_cnt >= 100) COMP_cnt = 0;
 	}
-	
 }
 
 int main(void)

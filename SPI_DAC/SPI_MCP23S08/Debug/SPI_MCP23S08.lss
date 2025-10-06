@@ -3,31 +3,31 @@ SPI_MCP23S08.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000016  00800100  0000073c  000007d0  2**0
+  0 .data         00000016  00800100  00000740  000007d4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000073c  00000000  00000000  00000094  2**1
+  1 .text         00000740  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000003  00800116  00800116  000007e6  2**0
+  2 .bss          00000003  00800116  00800116  000007ea  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000007e6  2**0
+  3 .comment      00000030  00000000  00000000  000007ea  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000818  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000081c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000040  00000000  00000000  00000854  2**0
+  5 .debug_aranges 00000040  00000000  00000000  00000858  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001ea1  00000000  00000000  00000894  2**0
+  6 .debug_info   00001ea3  00000000  00000000  00000898  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000991  00000000  00000000  00002735  2**0
+  7 .debug_abbrev 00000991  00000000  00000000  0000273b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000a0c  00000000  00000000  000030c6  2**0
+  8 .debug_line   00000a0d  00000000  00000000  000030cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000078  00000000  00000000  00003ad4  2**2
+  9 .debug_frame  00000078  00000000  00000000  00003adc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000578  00000000  00000000  00003b4c  2**0
+ 10 .debug_str    00000578  00000000  00000000  00003b54  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000015c7  00000000  00000000  000040c4  2**0
+ 11 .debug_loc    000015da  00000000  00000000  000040cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000060  00000000  00000000  0000568b  2**0
+ 12 .debug_ranges 00000060  00000000  00000000  000056a6  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -116,7 +116,7 @@ Disassembly of section .text:
   98:	11 e0       	ldi	r17, 0x01	; 1
   9a:	a0 e0       	ldi	r26, 0x00	; 0
   9c:	b1 e0       	ldi	r27, 0x01	; 1
-  9e:	ec e3       	ldi	r30, 0x3C	; 60
+  9e:	e0 e4       	ldi	r30, 0x40	; 64
   a0:	f7 e0       	ldi	r31, 0x07	; 7
   a2:	00 e0       	ldi	r16, 0x00	; 0
   a4:	0b bf       	out	0x3b, r16	; 59
@@ -141,7 +141,7 @@ Disassembly of section .text:
   be:	b2 07       	cpc	r27, r18
   c0:	e1 f7       	brne	.-8      	; 0xba <.do_clear_bss_loop>
   c2:	db d0       	rcall	.+438    	; 0x27a <main>
-  c4:	39 c3       	rjmp	.+1650   	; 0x738 <_exit>
+  c4:	3b c3       	rjmp	.+1654   	; 0x73c <_exit>
 
 000000c6 <__bad_interrupt>:
   c6:	9c cf       	rjmp	.-200    	; 0x0 <__vectors>
@@ -659,15 +659,15 @@ static inline void LCD_Comm(uint8_t command)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 2b6:	86 ef       	ldi	r24, 0xF6	; 246
- 2b8:	8a 95       	dec	r24
+ 2b6:	26 ef       	ldi	r18, 0xF6	; 246
+ 2b8:	2a 95       	dec	r18
  2ba:	f1 f7       	brne	.-4      	; 0x2b8 <main+0x3e>
     _delay_us(50);
     LCD_WINST = command;          // put command
  2bc:	88 e3       	ldi	r24, 0x38	; 56
  2be:	8b bb       	out	0x1b, r24	; 27
- 2c0:	96 ef       	ldi	r25, 0xF6	; 246
- 2c2:	9a 95       	dec	r25
+ 2c0:	86 ef       	ldi	r24, 0xF6	; 246
+ 2c2:	8a 95       	dec	r24
  2c4:	f1 f7       	brne	.-4      	; 0x2c2 <main+0x48>
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
@@ -722,15 +722,15 @@ static inline void LCD_Comm(uint8_t command)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 2fa:	86 ef       	ldi	r24, 0xF6	; 246
- 2fc:	8a 95       	dec	r24
+ 2fa:	26 ef       	ldi	r18, 0xF6	; 246
+ 2fc:	2a 95       	dec	r18
  2fe:	f1 f7       	brne	.-4      	; 0x2fc <main+0x82>
     _delay_us(50);
     LCD_WINST = command;          // put command
  300:	88 e3       	ldi	r24, 0x38	; 56
  302:	8b bb       	out	0x1b, r24	; 27
- 304:	96 ef       	ldi	r25, 0xF6	; 246
- 306:	9a 95       	dec	r25
+ 304:	86 ef       	ldi	r24, 0xF6	; 246
+ 306:	8a 95       	dec	r24
  308:	f1 f7       	brne	.-4      	; 0x306 <main+0x8c>
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
@@ -785,15 +785,15 @@ static inline void LCD_Comm(uint8_t command)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 33e:	86 ef       	ldi	r24, 0xF6	; 246
- 340:	8a 95       	dec	r24
+ 33e:	26 ef       	ldi	r18, 0xF6	; 246
+ 340:	2a 95       	dec	r18
  342:	f1 f7       	brne	.-4      	; 0x340 <main+0xc6>
     _delay_us(50);
     LCD_WINST = command;          // put command
  344:	88 e3       	ldi	r24, 0x38	; 56
  346:	8b bb       	out	0x1b, r24	; 27
- 348:	96 ef       	ldi	r25, 0xF6	; 246
- 34a:	9a 95       	dec	r25
+ 348:	86 ef       	ldi	r24, 0xF6	; 246
+ 34a:	8a 95       	dec	r24
  34c:	f1 f7       	brne	.-4      	; 0x34a <main+0xd0>
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
@@ -848,15 +848,15 @@ static inline void LCD_Comm(uint8_t command)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 382:	86 ef       	ldi	r24, 0xF6	; 246
- 384:	8a 95       	dec	r24
+ 382:	26 ef       	ldi	r18, 0xF6	; 246
+ 384:	2a 95       	dec	r18
  386:	f1 f7       	brne	.-4      	; 0x384 <main+0x10a>
     _delay_us(50);
     LCD_WINST = command;          // put command
  388:	8e e0       	ldi	r24, 0x0E	; 14
  38a:	8b bb       	out	0x1b, r24	; 27
- 38c:	96 ef       	ldi	r25, 0xF6	; 246
- 38e:	9a 95       	dec	r25
+ 38c:	86 ef       	ldi	r24, 0xF6	; 246
+ 38e:	8a 95       	dec	r24
  390:	f1 f7       	brne	.-4      	; 0x38e <main+0x114>
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
@@ -911,15 +911,15 @@ static inline void LCD_Comm(uint8_t command)
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 3c6:	86 ef       	ldi	r24, 0xF6	; 246
- 3c8:	8a 95       	dec	r24
+ 3c6:	26 ef       	ldi	r18, 0xF6	; 246
+ 3c8:	2a 95       	dec	r18
  3ca:	f1 f7       	brne	.-4      	; 0x3c8 <main+0x14e>
     _delay_us(50);
     LCD_WINST = command;          // put command
  3cc:	86 e0       	ldi	r24, 0x06	; 6
  3ce:	8b bb       	out	0x1b, r24	; 27
- 3d0:	96 ef       	ldi	r25, 0xF6	; 246
- 3d2:	9a 95       	dec	r25
+ 3d0:	86 ef       	ldi	r24, 0xF6	; 246
+ 3d2:	8a 95       	dec	r24
  3d4:	f1 f7       	brne	.-4      	; 0x3d2 <main+0x158>
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
@@ -982,21 +982,21 @@ static inline void LCD_Comm(uint8_t command)
     LCD_CTRL |= (1 << LCD_EN);    // E high
  40a:	81 60       	ori	r24, 0x01	; 1
  40c:	80 83       	st	Z, r24
- 40e:	86 ef       	ldi	r24, 0xF6	; 246
+ 40e:	26 ef       	ldi	r18, 0xF6	; 246
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 410:	8a 95       	dec	r24
+ 410:	2a 95       	dec	r18
  412:	f1 f7       	brne	.-4      	; 0x410 <__LOCK_REGION_LENGTH__+0x10>
  414:	80 e8       	ldi	r24, 0x80	; 128
     _delay_us(50);
     LCD_WINST = command;          // put command
  416:	8b bb       	out	0x1b, r24	; 27
- 418:	96 ef       	ldi	r25, 0xF6	; 246
- 41a:	9a 95       	dec	r25
+ 418:	86 ef       	ldi	r24, 0xF6	; 246
+ 41a:	8a 95       	dec	r24
  41c:	f1 f7       	brne	.-4      	; 0x41a <__LOCK_REGION_LENGTH__+0x1a>
  41e:	80 81       	ld	r24, Z
     _delay_us(50);
@@ -1056,20 +1056,20 @@ static inline void LCD_Data(uint8_t ch)
     LCD_CTRL |= (1 << LCD_EN);    // E high
  456:	81 60       	ori	r24, 0x01	; 1
  458:	80 83       	st	Z, r24
- 45a:	86 ef       	ldi	r24, 0xF6	; 246
+ 45a:	26 ef       	ldi	r18, 0xF6	; 246
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 45c:	8a 95       	dec	r24
+ 45c:	2a 95       	dec	r18
  45e:	f1 f7       	brne	.-4      	; 0x45c <__LOCK_REGION_LENGTH__+0x5c>
  460:	9b bb       	out	0x1b, r25	; 27
     _delay_us(50);
     LCD_WDATA = ch;               // put data
- 462:	96 ef       	ldi	r25, 0xF6	; 246
- 464:	9a 95       	dec	r25
+ 462:	86 ef       	ldi	r24, 0xF6	; 246
+ 464:	8a 95       	dec	r24
  466:	f1 f7       	brne	.-4      	; 0x464 <__LOCK_REGION_LENGTH__+0x64>
  468:	80 81       	ld	r24, Z
     _delay_us(50);
@@ -1104,15 +1104,15 @@ static inline void LCD_Comm(uint8_t command)
     LCD_CTRL |= (1 << LCD_EN);    // E high
  486:	81 60       	ori	r24, 0x01	; 1
  488:	80 83       	st	Z, r24
- 48a:	86 ef       	ldi	r24, 0xF6	; 246
- 48c:	8a 95       	dec	r24
+ 48a:	96 ef       	ldi	r25, 0xF6	; 246
+ 48c:	9a 95       	dec	r25
  48e:	f1 f7       	brne	.-4      	; 0x48c <__LOCK_REGION_LENGTH__+0x8c>
  490:	80 ec       	ldi	r24, 0xC0	; 192
     _delay_us(50);
     LCD_WINST = command;          // put command
  492:	8b bb       	out	0x1b, r24	; 27
- 494:	96 ef       	ldi	r25, 0xF6	; 246
- 496:	9a 95       	dec	r25
+ 494:	26 ef       	ldi	r18, 0xF6	; 246
+ 496:	2a 95       	dec	r18
  498:	f1 f7       	brne	.-4      	; 0x496 <__LOCK_REGION_LENGTH__+0x96>
  49a:	80 81       	ld	r24, Z
     _delay_us(50);
@@ -1172,20 +1172,20 @@ static inline void LCD_Data(uint8_t ch)
     LCD_CTRL |= (1 << LCD_EN);    // E high
  4d2:	81 60       	ori	r24, 0x01	; 1
  4d4:	80 83       	st	Z, r24
- 4d6:	86 ef       	ldi	r24, 0xF6	; 246
+ 4d6:	26 ef       	ldi	r18, 0xF6	; 246
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 4d8:	8a 95       	dec	r24
+ 4d8:	2a 95       	dec	r18
  4da:	f1 f7       	brne	.-4      	; 0x4d8 <__LOCK_REGION_LENGTH__+0xd8>
  4dc:	9b bb       	out	0x1b, r25	; 27
     _delay_us(50);
     LCD_WDATA = ch;               // put data
- 4de:	96 ef       	ldi	r25, 0xF6	; 246
- 4e0:	9a 95       	dec	r25
+ 4de:	86 ef       	ldi	r24, 0xF6	; 246
+ 4e0:	8a 95       	dec	r24
  4e2:	f1 f7       	brne	.-4      	; 0x4e0 <__LOCK_REGION_LENGTH__+0xe0>
  4e4:	80 81       	ld	r24, Z
     _delay_us(50);
@@ -1302,7 +1302,7 @@ static inline uint8_t spi_Xfer_return(void)
 	#else
 	g_evt = 1;
  53e:	78 94       	sei
- 540:	10 e0       	ldi	r17, 0x00	; 0
+ 540:	c0 e0       	ldi	r28, 0x00	; 0
  542:	80 91 18 01 	lds	r24, 0x0118	; 0x800118 <g_evt>
 int main(void)
 {
@@ -1317,480 +1317,485 @@ int main(void)
 	while (1)
 	{
 		if(g_evt)
- 548:	e1 f3       	breq	.-8      	; 0x542 <__LOCK_REGION_LENGTH__+0x142>
- 54a:	ef ef       	ldi	r30, 0xFF	; 255
- 54c:	f7 e4       	ldi	r31, 0x47	; 71
- 54e:	31 97       	sbiw	r30, 0x01	; 1
+ 548:	09 f4       	brne	.+2      	; 0x54c <__LOCK_REGION_LENGTH__+0x14c>
+ 54a:	f2 c0       	rjmp	.+484    	; 0x730 <__LOCK_REGION_LENGTH__+0x330>
+ 54c:	ef ef       	ldi	r30, 0xFF	; 255
+ 54e:	f7 e4       	ldi	r31, 0x47	; 71
+ 550:	31 97       	sbiw	r30, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 550:	f1 f7       	brne	.-4      	; 0x54e <__LOCK_REGION_LENGTH__+0x14e>
- 552:	00 c0       	rjmp	.+0      	; 0x554 <__LOCK_REGION_LENGTH__+0x154>
- 554:	00 00       	nop
- 556:	88 b3       	in	r24, 0x18	; 24
- 558:	8e 7f       	andi	r24, 0xFE	; 254
- 55a:	88 bb       	out	0x18, r24	; 24
+ 552:	f1 f7       	brne	.-4      	; 0x550 <__LOCK_REGION_LENGTH__+0x150>
+ 554:	00 c0       	rjmp	.+0      	; 0x556 <__LOCK_REGION_LENGTH__+0x156>
+ 556:	00 00       	nop
+ 558:	88 b3       	in	r24, 0x18	; 24
+ 55a:	8e 7f       	andi	r24, 0xFE	; 254
+ 55c:	88 bb       	out	0x18, r24	; 24
 	SPI_CS_HIGH();
 }
 static inline uint8_t MCP_Read(uint8_t reg){
 	uint8_t SPI_Rx=0;
 	
 	SPI_CS_LOW();
- 55c:	81 e4       	ldi	r24, 0x41	; 65
- 55e:	8f b9       	out	0x0f, r24	; 15
- 560:	77 9b       	sbis	0x0e, 7	; 14
+ 55e:	81 e4       	ldi	r24, 0x41	; 65
+ 560:	8f b9       	out	0x0f, r24	; 15
+ 562:	77 9b       	sbis	0x0e, 7	; 14
 volatile uint8_t g_cap=0;
 
 // ---- MCP23S08 R/W ----
 static inline void spi_Xfer(uint8_t data)
 {
 	SPDR = data;
- 562:	fe cf       	rjmp	.-4      	; 0x560 <__LOCK_REGION_LENGTH__+0x160>
- 564:	89 e0       	ldi	r24, 0x09	; 9
+ 564:	fe cf       	rjmp	.-4      	; 0x562 <__LOCK_REGION_LENGTH__+0x162>
+ 566:	89 e0       	ldi	r24, 0x09	; 9
 	while(!(SPSR&(1<<SPIF)));
- 566:	8f b9       	out	0x0f, r24	; 15
- 568:	77 9b       	sbis	0x0e, 7	; 14
+ 568:	8f b9       	out	0x0f, r24	; 15
+ 56a:	77 9b       	sbis	0x0e, 7	; 14
 volatile uint8_t g_cap=0;
 
 // ---- MCP23S08 R/W ----
 static inline void spi_Xfer(uint8_t data)
 {
 	SPDR = data;
- 56a:	fe cf       	rjmp	.-4      	; 0x568 <__LOCK_REGION_LENGTH__+0x168>
- 56c:	1f b8       	out	0x0f, r1	; 15
+ 56c:	fe cf       	rjmp	.-4      	; 0x56a <__LOCK_REGION_LENGTH__+0x16a>
+ 56e:	1f b8       	out	0x0f, r1	; 15
 	while(!(SPSR&(1<<SPIF)));
- 56e:	77 9b       	sbis	0x0e, 7	; 14
- 570:	fe cf       	rjmp	.-4      	; 0x56e <__LOCK_REGION_LENGTH__+0x16e>
+ 570:	77 9b       	sbis	0x0e, 7	; 14
+ 572:	fe cf       	rjmp	.-4      	; 0x570 <__LOCK_REGION_LENGTH__+0x170>
 volatile uint8_t g_cap=0;
 
 // ---- MCP23S08 R/W ----
 static inline void spi_Xfer(uint8_t data)
 {
 	SPDR = data;
- 572:	df b1       	in	r29, 0x0f	; 15
+ 574:	9f b1       	in	r25, 0x0f	; 15
 	while(!(SPSR&(1<<SPIF)));
- 574:	88 b3       	in	r24, 0x18	; 24
- 576:	81 60       	ori	r24, 0x01	; 1
+ 576:	88 b3       	in	r24, 0x18	; 24
+ 578:	81 60       	ori	r24, 0x01	; 1
 }
 static inline uint8_t spi_Xfer_return(void)
 {
 	spi_Xfer(0x00); //dummy data Xfer
 	
 	return SPDR;
- 578:	88 bb       	out	0x18, r24	; 24
+ 57a:	88 bb       	out	0x18, r24	; 24
 	
 	spi_Xfer(MCP23S08_ADDR_R);
 	spi_Xfer(reg);
 	SPI_Rx=spi_Xfer_return();
 	
 	SPI_CS_HIGH();
- 57a:	d2 95       	swap	r29
- 57c:	df 70       	andi	r29, 0x0F	; 15
- 57e:	cd 2f       	mov	r28, r29
+ 57c:	92 95       	swap	r25
+ 57e:	9f 70       	andi	r25, 0x0F	; 15
+ 580:	89 2f       	mov	r24, r25
 			_delay_ms(5);
 			
 			#ifndef _MCP23S08_Event_Mode_
 			//MCP Nomal function
 			now= MCP_Read(GPIO);
 			in_nib = (now>>4)&0x0F;		//상위 4비트
- 580:	c0 95       	com	r28
- 582:	cf 70       	andi	r28, 0x0F	; 15
+ 582:	80 95       	com	r24
+ 584:	8f 70       	andi	r24, 0x0F	; 15
 			//MCP Event(interrupt) function
 			in_nib = (g_cap>>4)&0x0F;	//상위 4비트
 			g_evt=0;	//INT0 Flag reset...
 			#endif
 			
 			led = (~in_nib)&0x0F; //눌림=0 -> LED ON(active-low 가정)
- 584:	c1 30       	cpi	r28, 0x01	; 1
- 586:	29 f4       	brne	.+10     	; 0x592 <__LOCK_REGION_LENGTH__+0x192>
- 588:	8e e0       	ldi	r24, 0x0E	; 14
-			// 눌렸을 때만 led_mode를 설정하도록 함
+ 586:	81 30       	cpi	r24, 0x01	; 1
+ 588:	29 f4       	brne	.+10     	; 0x594 <__LOCK_REGION_LENGTH__+0x194>
+ 58a:	2e e0       	ldi	r18, 0x0E	; 14
 			if(led == 0x01)			{on_led = 0x0E; led_mode=led;} // 왼쪽 shift
- 58a:	80 93 16 01 	sts	0x0116, r24	; 0x800116 <__data_end>
- 58e:	1c 2f       	mov	r17, r28
- 590:	14 c0       	rjmp	.+40     	; 0x5ba <__LOCK_REGION_LENGTH__+0x1ba>
- 592:	c2 30       	cpi	r28, 0x02	; 2
- 594:	29 f4       	brne	.+10     	; 0x5a0 <__LOCK_REGION_LENGTH__+0x1a0>
- 596:	87 e0       	ldi	r24, 0x07	; 7
+ 58c:	20 93 16 01 	sts	0x0116, r18	; 0x800116 <__data_end>
+ 590:	c8 2f       	mov	r28, r24
+ 592:	14 c0       	rjmp	.+40     	; 0x5bc <__LOCK_REGION_LENGTH__+0x1bc>
+ 594:	82 30       	cpi	r24, 0x02	; 2
+ 596:	29 f4       	brne	.+10     	; 0x5a2 <__LOCK_REGION_LENGTH__+0x1a2>
+ 598:	27 e0       	ldi	r18, 0x07	; 7
 			else if(led == 0x02)	{on_led = 0x07; led_mode=led;} // 오른쪽 shift
- 598:	80 93 16 01 	sts	0x0116, r24	; 0x800116 <__data_end>
- 59c:	1c 2f       	mov	r17, r28
- 59e:	0d c0       	rjmp	.+26     	; 0x5ba <__LOCK_REGION_LENGTH__+0x1ba>
- 5a0:	c4 30       	cpi	r28, 0x04	; 4
- 5a2:	29 f4       	brne	.+10     	; 0x5ae <__LOCK_REGION_LENGTH__+0x1ae>
- 5a4:	8f e0       	ldi	r24, 0x0F	; 15
+ 59a:	20 93 16 01 	sts	0x0116, r18	; 0x800116 <__data_end>
+ 59e:	c8 2f       	mov	r28, r24
+ 5a0:	0d c0       	rjmp	.+26     	; 0x5bc <__LOCK_REGION_LENGTH__+0x1bc>
+ 5a2:	84 30       	cpi	r24, 0x04	; 4
+ 5a4:	29 f4       	brne	.+10     	; 0x5b0 <__LOCK_REGION_LENGTH__+0x1b0>
+ 5a6:	2f e0       	ldi	r18, 0x0F	; 15
 			else if(led == 0x04)	{on_led = 0x0F; led_mode=led;} // 전체 toggle 
- 5a6:	80 93 16 01 	sts	0x0116, r24	; 0x800116 <__data_end>
- 5aa:	1c 2f       	mov	r17, r28
- 5ac:	06 c0       	rjmp	.+12     	; 0x5ba <__LOCK_REGION_LENGTH__+0x1ba>
- 5ae:	c8 30       	cpi	r28, 0x08	; 8
- 5b0:	21 f4       	brne	.+8      	; 0x5ba <__LOCK_REGION_LENGTH__+0x1ba>
- 5b2:	83 e0       	ldi	r24, 0x03	; 3
+ 5a8:	20 93 16 01 	sts	0x0116, r18	; 0x800116 <__data_end>
+ 5ac:	c8 2f       	mov	r28, r24
+ 5ae:	06 c0       	rjmp	.+12     	; 0x5bc <__LOCK_REGION_LENGTH__+0x1bc>
+ 5b0:	88 30       	cpi	r24, 0x08	; 8
+ 5b2:	21 f4       	brne	.+8      	; 0x5bc <__LOCK_REGION_LENGTH__+0x1bc>
+ 5b4:	23 e0       	ldi	r18, 0x03	; 3
 			else if(led == 0x08)	{on_led = 0x03; led_mode=led;} // 2개씩 교대 점멸
- 5b4:	80 93 16 01 	sts	0x0116, r24	; 0x800116 <__data_end>
- 5b8:	1c 2f       	mov	r17, r28
- 5ba:	11 23       	and	r17, r17
- 5bc:	11 f0       	breq	.+4      	; 0x5c2 <__LOCK_REGION_LENGTH__+0x1c2>
-			
-			if(led_mode != 0x00) LED_PRINT(led_mode);
- 5be:	81 2f       	mov	r24, r17
- 5c0:	dc dd       	rcall	.-1096   	; 0x17a <LED_PRINT>
- 5c2:	e5 e6       	ldi	r30, 0x65	; 101
- 5c4:	f0 e0       	ldi	r31, 0x00	; 0
- 5c6:	80 81       	ld	r24, Z
+ 5b6:	20 93 16 01 	sts	0x0116, r18	; 0x800116 <__data_end>
+ 5ba:	c8 2f       	mov	r28, r24
+ 5bc:	e5 e6       	ldi	r30, 0x65	; 101
+ 5be:	f0 e0       	ldi	r31, 0x00	; 0
+ 5c0:	20 81       	ld	r18, Z
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
 }
 
 static inline void LCD_Comm(uint8_t command)
 {
     LCD_CTRL &= ~(1 << LCD_RS);   // RS=0 -> command
- 5c8:	8b 7f       	andi	r24, 0xFB	; 251
- 5ca:	80 83       	st	Z, r24
- 5cc:	80 81       	ld	r24, Z
- 5ce:	8d 7f       	andi	r24, 0xFD	; 253
- 5d0:	80 83       	st	Z, r24
+ 5c2:	2b 7f       	andi	r18, 0xFB	; 251
+ 5c4:	20 83       	st	Z, r18
+ 5c6:	20 81       	ld	r18, Z
+ 5c8:	2d 7f       	andi	r18, 0xFD	; 253
+ 5ca:	20 83       	st	Z, r18
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
- 5d2:	80 81       	ld	r24, Z
- 5d4:	81 60       	ori	r24, 0x01	; 1
- 5d6:	80 83       	st	Z, r24
+ 5cc:	20 81       	ld	r18, Z
+ 5ce:	21 60       	ori	r18, 0x01	; 1
+ 5d0:	20 83       	st	Z, r18
     LCD_CTRL |= (1 << LCD_EN);    // E high
- 5d8:	86 ef       	ldi	r24, 0xF6	; 246
- 5da:	8a 95       	dec	r24
- 5dc:	f1 f7       	brne	.-4      	; 0x5da <__LOCK_REGION_LENGTH__+0x1da>
+ 5d2:	26 ef       	ldi	r18, 0xF6	; 246
+ 5d4:	2a 95       	dec	r18
+ 5d6:	f1 f7       	brne	.-4      	; 0x5d4 <__LOCK_REGION_LENGTH__+0x1d4>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 5de:	88 e8       	ldi	r24, 0x88	; 136
- 5e0:	8b bb       	out	0x1b, r24	; 27
- 5e2:	96 ef       	ldi	r25, 0xF6	; 246
+ 5d8:	28 e8       	ldi	r18, 0x88	; 136
+ 5da:	2b bb       	out	0x1b, r18	; 27
+ 5dc:	26 ef       	ldi	r18, 0xF6	; 246
     _delay_us(50);
     LCD_WINST = command;          // put command
- 5e4:	9a 95       	dec	r25
- 5e6:	f1 f7       	brne	.-4      	; 0x5e4 <__LOCK_REGION_LENGTH__+0x1e4>
- 5e8:	80 81       	ld	r24, Z
- 5ea:	8e 7f       	andi	r24, 0xFE	; 254
- 5ec:	80 83       	st	Z, r24
+ 5de:	2a 95       	dec	r18
+ 5e0:	f1 f7       	brne	.-4      	; 0x5de <__LOCK_REGION_LENGTH__+0x1de>
+ 5e2:	20 81       	ld	r18, Z
+ 5e4:	2e 7f       	andi	r18, 0xFE	; 254
+ 5e6:	20 83       	st	Z, r18
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 5ee:	81 e0       	ldi	r24, 0x01	; 1
- 5f0:	06 c0       	rjmp	.+12     	; 0x5fe <__LOCK_REGION_LENGTH__+0x1fe>
- 5f2:	e6 e6       	ldi	r30, 0x66	; 102
- 5f4:	fe e0       	ldi	r31, 0x0E	; 14
- 5f6:	31 97       	sbiw	r30, 0x01	; 1
+ 5e8:	21 e0       	ldi	r18, 0x01	; 1
+ 5ea:	06 c0       	rjmp	.+12     	; 0x5f8 <__LOCK_REGION_LENGTH__+0x1f8>
+ 5ec:	e6 e6       	ldi	r30, 0x66	; 102
+ 5ee:	fe e0       	ldi	r31, 0x0E	; 14
+ 5f0:	31 97       	sbiw	r30, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 5f8:	f1 f7       	brne	.-4      	; 0x5f6 <__LOCK_REGION_LENGTH__+0x1f6>
- 5fa:	00 00       	nop
- 5fc:	89 2f       	mov	r24, r25
- 5fe:	9f ef       	ldi	r25, 0xFF	; 255
- 600:	98 0f       	add	r25, r24
+ 5f2:	f1 f7       	brne	.-4      	; 0x5f0 <__LOCK_REGION_LENGTH__+0x1f0>
+ 5f4:	00 00       	nop
+ 5f6:	23 2f       	mov	r18, r19
+ 5f8:	3f ef       	ldi	r19, 0xFF	; 255
+ 5fa:	32 0f       	add	r19, r18
 }
 
 static inline void LCD_Delay(uint8_t ms)
 {
     while (ms--) _delay_ms(1);
- 602:	81 11       	cpse	r24, r1
- 604:	f6 cf       	rjmp	.-20     	; 0x5f2 <__LOCK_REGION_LENGTH__+0x1f2>
- 606:	e5 e6       	ldi	r30, 0x65	; 101
- 608:	f0 e0       	ldi	r31, 0x00	; 0
- 60a:	80 81       	ld	r24, Z
+ 5fc:	21 11       	cpse	r18, r1
+ 5fe:	f6 cf       	rjmp	.-20     	; 0x5ec <__LOCK_REGION_LENGTH__+0x1ec>
+ 600:	e5 e6       	ldi	r30, 0x65	; 101
+ 602:	f0 e0       	ldi	r31, 0x00	; 0
+ 604:	20 81       	ld	r18, Z
 static inline void LCD_Cursor_Shift(uint8_t p);
 static inline void LCD_Cursor_Home(void);
 
 static inline void LCD_Data(uint8_t ch)
 {
     LCD_CTRL |= (1 << LCD_RS);    // RS=1 -> data
- 60c:	84 60       	ori	r24, 0x04	; 4
- 60e:	80 83       	st	Z, r24
- 610:	80 81       	ld	r24, Z
- 612:	8d 7f       	andi	r24, 0xFD	; 253
- 614:	80 83       	st	Z, r24
+ 606:	24 60       	ori	r18, 0x04	; 4
+ 608:	20 83       	st	Z, r18
+ 60a:	20 81       	ld	r18, Z
+ 60c:	2d 7f       	andi	r18, 0xFD	; 253
+ 60e:	20 83       	st	Z, r18
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
- 616:	80 81       	ld	r24, Z
- 618:	81 60       	ori	r24, 0x01	; 1
- 61a:	80 83       	st	Z, r24
+ 610:	20 81       	ld	r18, Z
+ 612:	21 60       	ori	r18, 0x01	; 1
+ 614:	20 83       	st	Z, r18
     LCD_CTRL |= (1 << LCD_EN);    // E high
- 61c:	86 ef       	ldi	r24, 0xF6	; 246
- 61e:	8a 95       	dec	r24
- 620:	f1 f7       	brne	.-4      	; 0x61e <__LOCK_REGION_LENGTH__+0x21e>
+ 616:	26 ef       	ldi	r18, 0xF6	; 246
+ 618:	2a 95       	dec	r18
+ 61a:	f1 f7       	brne	.-4      	; 0x618 <__LOCK_REGION_LENGTH__+0x218>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 622:	80 e3       	ldi	r24, 0x30	; 48
- 624:	8b bb       	out	0x1b, r24	; 27
- 626:	96 ef       	ldi	r25, 0xF6	; 246
+ 61c:	20 e3       	ldi	r18, 0x30	; 48
+ 61e:	2b bb       	out	0x1b, r18	; 27
+ 620:	26 ef       	ldi	r18, 0xF6	; 246
     _delay_us(50);
     LCD_WDATA = ch;               // put data
- 628:	9a 95       	dec	r25
- 62a:	f1 f7       	brne	.-4      	; 0x628 <__LOCK_REGION_LENGTH__+0x228>
- 62c:	80 81       	ld	r24, Z
- 62e:	8e 7f       	andi	r24, 0xFE	; 254
- 630:	80 83       	st	Z, r24
+ 622:	2a 95       	dec	r18
+ 624:	f1 f7       	brne	.-4      	; 0x622 <__LOCK_REGION_LENGTH__+0x222>
+ 626:	20 81       	ld	r18, Z
+ 628:	2e 7f       	andi	r18, 0xFE	; 254
+ 62a:	20 83       	st	Z, r18
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 632:	da 30       	cpi	r29, 0x0A	; 10
- 634:	10 f4       	brcc	.+4      	; 0x63a <__LOCK_REGION_LENGTH__+0x23a>
- 636:	d0 5d       	subi	r29, 0xD0	; 208
+ 62c:	9a 30       	cpi	r25, 0x0A	; 10
+ 62e:	10 f4       	brcc	.+4      	; 0x634 <__LOCK_REGION_LENGTH__+0x234>
+ 630:	90 5d       	subi	r25, 0xD0	; 208
 ISR(INT0_vect){
 	g_cap = MCP_Read(INTCAP);	// 변화 당시 값 캡쳐 + INT 클리어
 	g_evt = 1;
 }
 
 static inline char hex1(uint8_t n){ n &= 0x0F; return (n<10)?('0'+n):('A'+n-10); }
- 638:	01 c0       	rjmp	.+2      	; 0x63c <__LOCK_REGION_LENGTH__+0x23c>
- 63a:	d9 5c       	subi	r29, 0xC9	; 201
- 63c:	81 e0       	ldi	r24, 0x01	; 1
- 63e:	06 c0       	rjmp	.+12     	; 0x64c <__LOCK_REGION_LENGTH__+0x24c>
- 640:	e6 e6       	ldi	r30, 0x66	; 102
+ 632:	01 c0       	rjmp	.+2      	; 0x636 <__LOCK_REGION_LENGTH__+0x236>
+ 634:	99 5c       	subi	r25, 0xC9	; 201
+ 636:	21 e0       	ldi	r18, 0x01	; 1
+ 638:	06 c0       	rjmp	.+12     	; 0x646 <__LOCK_REGION_LENGTH__+0x246>
+ 63a:	e6 e6       	ldi	r30, 0x66	; 102
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
     LCD_CTRL |= (1 << LCD_EN);    // E high
     _delay_us(50);
     LCD_WINST = command;          // put command
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 642:	fe e0       	ldi	r31, 0x0E	; 14
- 644:	31 97       	sbiw	r30, 0x01	; 1
+ 63c:	fe e0       	ldi	r31, 0x0E	; 14
+ 63e:	31 97       	sbiw	r30, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 646:	f1 f7       	brne	.-4      	; 0x644 <__LOCK_REGION_LENGTH__+0x244>
- 648:	00 00       	nop
- 64a:	89 2f       	mov	r24, r25
- 64c:	9f ef       	ldi	r25, 0xFF	; 255
- 64e:	98 0f       	add	r25, r24
+ 640:	f1 f7       	brne	.-4      	; 0x63e <__LOCK_REGION_LENGTH__+0x23e>
+ 642:	00 00       	nop
+ 644:	23 2f       	mov	r18, r19
+ 646:	3f ef       	ldi	r19, 0xFF	; 255
+ 648:	32 0f       	add	r19, r18
 }
 
 static inline void LCD_Delay(uint8_t ms)
 {
     while (ms--) _delay_ms(1);
- 650:	81 11       	cpse	r24, r1
- 652:	f6 cf       	rjmp	.-20     	; 0x640 <__LOCK_REGION_LENGTH__+0x240>
- 654:	e5 e6       	ldi	r30, 0x65	; 101
- 656:	f0 e0       	ldi	r31, 0x00	; 0
- 658:	80 81       	ld	r24, Z
+ 64a:	21 11       	cpse	r18, r1
+ 64c:	f6 cf       	rjmp	.-20     	; 0x63a <__LOCK_REGION_LENGTH__+0x23a>
+ 64e:	e5 e6       	ldi	r30, 0x65	; 101
+ 650:	f0 e0       	ldi	r31, 0x00	; 0
+ 652:	20 81       	ld	r18, Z
 static inline void LCD_Cursor_Shift(uint8_t p);
 static inline void LCD_Cursor_Home(void);
 
 static inline void LCD_Data(uint8_t ch)
 {
     LCD_CTRL |= (1 << LCD_RS);    // RS=1 -> data
- 65a:	84 60       	ori	r24, 0x04	; 4
- 65c:	80 83       	st	Z, r24
- 65e:	80 81       	ld	r24, Z
- 660:	8d 7f       	andi	r24, 0xFD	; 253
- 662:	80 83       	st	Z, r24
+ 654:	24 60       	ori	r18, 0x04	; 4
+ 656:	20 83       	st	Z, r18
+ 658:	20 81       	ld	r18, Z
+ 65a:	2d 7f       	andi	r18, 0xFD	; 253
+ 65c:	20 83       	st	Z, r18
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
- 664:	80 81       	ld	r24, Z
- 666:	81 60       	ori	r24, 0x01	; 1
- 668:	80 83       	st	Z, r24
+ 65e:	20 81       	ld	r18, Z
+ 660:	21 60       	ori	r18, 0x01	; 1
+ 662:	20 83       	st	Z, r18
     LCD_CTRL |= (1 << LCD_EN);    // E high
- 66a:	86 ef       	ldi	r24, 0xF6	; 246
- 66c:	8a 95       	dec	r24
- 66e:	f1 f7       	brne	.-4      	; 0x66c <__LOCK_REGION_LENGTH__+0x26c>
+ 664:	26 ef       	ldi	r18, 0xF6	; 246
+ 666:	2a 95       	dec	r18
+ 668:	f1 f7       	brne	.-4      	; 0x666 <__LOCK_REGION_LENGTH__+0x266>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 670:	db bb       	out	0x1b, r29	; 27
- 672:	96 ef       	ldi	r25, 0xF6	; 246
- 674:	9a 95       	dec	r25
+ 66a:	9b bb       	out	0x1b, r25	; 27
+ 66c:	96 ef       	ldi	r25, 0xF6	; 246
+ 66e:	9a 95       	dec	r25
     _delay_us(50);
     LCD_WDATA = ch;               // put data
- 676:	f1 f7       	brne	.-4      	; 0x674 <__LOCK_REGION_LENGTH__+0x274>
- 678:	80 81       	ld	r24, Z
- 67a:	8e 7f       	andi	r24, 0xFE	; 254
- 67c:	80 83       	st	Z, r24
+ 670:	f1 f7       	brne	.-4      	; 0x66e <__LOCK_REGION_LENGTH__+0x26e>
+ 672:	90 81       	ld	r25, Z
+ 674:	9e 7f       	andi	r25, 0xFE	; 254
+ 676:	90 83       	st	Z, r25
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 67e:	80 81       	ld	r24, Z
- 680:	8b 7f       	andi	r24, 0xFB	; 251
- 682:	80 83       	st	Z, r24
+ 678:	90 81       	ld	r25, Z
+ 67a:	9b 7f       	andi	r25, 0xFB	; 251
+ 67c:	90 83       	st	Z, r25
 }
 
 static inline void LCD_Comm(uint8_t command)
 {
     LCD_CTRL &= ~(1 << LCD_RS);   // RS=0 -> command
- 684:	80 81       	ld	r24, Z
- 686:	8d 7f       	andi	r24, 0xFD	; 253
- 688:	80 83       	st	Z, r24
+ 67e:	90 81       	ld	r25, Z
+ 680:	9d 7f       	andi	r25, 0xFD	; 253
+ 682:	90 83       	st	Z, r25
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
- 68a:	80 81       	ld	r24, Z
- 68c:	81 60       	ori	r24, 0x01	; 1
- 68e:	80 83       	st	Z, r24
+ 684:	90 81       	ld	r25, Z
+ 686:	91 60       	ori	r25, 0x01	; 1
+ 688:	90 83       	st	Z, r25
     LCD_CTRL |= (1 << LCD_EN);    // E high
- 690:	86 ef       	ldi	r24, 0xF6	; 246
- 692:	8a 95       	dec	r24
- 694:	f1 f7       	brne	.-4      	; 0x692 <__LOCK_REGION_LENGTH__+0x292>
- 696:	88 ec       	ldi	r24, 0xC8	; 200
- 698:	8b bb       	out	0x1b, r24	; 27
- 69a:	96 ef       	ldi	r25, 0xF6	; 246
+ 68a:	26 ef       	ldi	r18, 0xF6	; 246
+ 68c:	2a 95       	dec	r18
+ 68e:	f1 f7       	brne	.-4      	; 0x68c <__LOCK_REGION_LENGTH__+0x28c>
+ 690:	98 ec       	ldi	r25, 0xC8	; 200
+ 692:	9b bb       	out	0x1b, r25	; 27
+ 694:	96 ef       	ldi	r25, 0xF6	; 246
     _delay_us(50);
     LCD_WINST = command;          // put command
- 69c:	9a 95       	dec	r25
- 69e:	f1 f7       	brne	.-4      	; 0x69c <__LOCK_REGION_LENGTH__+0x29c>
- 6a0:	80 81       	ld	r24, Z
- 6a2:	8e 7f       	andi	r24, 0xFE	; 254
- 6a4:	80 83       	st	Z, r24
+ 696:	9a 95       	dec	r25
+ 698:	f1 f7       	brne	.-4      	; 0x696 <__LOCK_REGION_LENGTH__+0x296>
+ 69a:	90 81       	ld	r25, Z
+ 69c:	9e 7f       	andi	r25, 0xFE	; 254
+ 69e:	90 83       	st	Z, r25
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 6a6:	81 e0       	ldi	r24, 0x01	; 1
- 6a8:	06 c0       	rjmp	.+12     	; 0x6b6 <__LOCK_REGION_LENGTH__+0x2b6>
- 6aa:	e6 e6       	ldi	r30, 0x66	; 102
- 6ac:	fe e0       	ldi	r31, 0x0E	; 14
- 6ae:	31 97       	sbiw	r30, 0x01	; 1
+ 6a0:	91 e0       	ldi	r25, 0x01	; 1
+ 6a2:	06 c0       	rjmp	.+12     	; 0x6b0 <__LOCK_REGION_LENGTH__+0x2b0>
+ 6a4:	e6 e6       	ldi	r30, 0x66	; 102
+ 6a6:	fe e0       	ldi	r31, 0x0E	; 14
+ 6a8:	31 97       	sbiw	r30, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 6b0:	f1 f7       	brne	.-4      	; 0x6ae <__LOCK_REGION_LENGTH__+0x2ae>
- 6b2:	00 00       	nop
- 6b4:	89 2f       	mov	r24, r25
- 6b6:	9f ef       	ldi	r25, 0xFF	; 255
- 6b8:	98 0f       	add	r25, r24
+ 6aa:	f1 f7       	brne	.-4      	; 0x6a8 <__LOCK_REGION_LENGTH__+0x2a8>
+ 6ac:	00 00       	nop
+ 6ae:	92 2f       	mov	r25, r18
+ 6b0:	2f ef       	ldi	r18, 0xFF	; 255
+ 6b2:	29 0f       	add	r18, r25
 }
 
 static inline void LCD_Delay(uint8_t ms)
 {
     while (ms--) _delay_ms(1);
- 6ba:	81 11       	cpse	r24, r1
- 6bc:	f6 cf       	rjmp	.-20     	; 0x6aa <__LOCK_REGION_LENGTH__+0x2aa>
- 6be:	e5 e6       	ldi	r30, 0x65	; 101
- 6c0:	f0 e0       	ldi	r31, 0x00	; 0
- 6c2:	80 81       	ld	r24, Z
+ 6b4:	91 11       	cpse	r25, r1
+ 6b6:	f6 cf       	rjmp	.-20     	; 0x6a4 <__LOCK_REGION_LENGTH__+0x2a4>
+ 6b8:	e5 e6       	ldi	r30, 0x65	; 101
+ 6ba:	f0 e0       	ldi	r31, 0x00	; 0
+ 6bc:	90 81       	ld	r25, Z
 static inline void LCD_Cursor_Shift(uint8_t p);
 static inline void LCD_Cursor_Home(void);
 
 static inline void LCD_Data(uint8_t ch)
 {
     LCD_CTRL |= (1 << LCD_RS);    // RS=1 -> data
- 6c4:	84 60       	ori	r24, 0x04	; 4
- 6c6:	80 83       	st	Z, r24
- 6c8:	80 81       	ld	r24, Z
- 6ca:	8d 7f       	andi	r24, 0xFD	; 253
- 6cc:	80 83       	st	Z, r24
+ 6be:	94 60       	ori	r25, 0x04	; 4
+ 6c0:	90 83       	st	Z, r25
+ 6c2:	90 81       	ld	r25, Z
+ 6c4:	9d 7f       	andi	r25, 0xFD	; 253
+ 6c6:	90 83       	st	Z, r25
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
- 6ce:	80 81       	ld	r24, Z
- 6d0:	81 60       	ori	r24, 0x01	; 1
- 6d2:	80 83       	st	Z, r24
+ 6c8:	90 81       	ld	r25, Z
+ 6ca:	91 60       	ori	r25, 0x01	; 1
+ 6cc:	90 83       	st	Z, r25
     LCD_CTRL |= (1 << LCD_EN);    // E high
- 6d4:	86 ef       	ldi	r24, 0xF6	; 246
- 6d6:	8a 95       	dec	r24
- 6d8:	f1 f7       	brne	.-4      	; 0x6d6 <__LOCK_REGION_LENGTH__+0x2d6>
+ 6ce:	26 ef       	ldi	r18, 0xF6	; 246
+ 6d0:	2a 95       	dec	r18
+ 6d2:	f1 f7       	brne	.-4      	; 0x6d0 <__LOCK_REGION_LENGTH__+0x2d0>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 6da:	80 e3       	ldi	r24, 0x30	; 48
- 6dc:	8b bb       	out	0x1b, r24	; 27
- 6de:	96 ef       	ldi	r25, 0xF6	; 246
+ 6d4:	90 e3       	ldi	r25, 0x30	; 48
+ 6d6:	9b bb       	out	0x1b, r25	; 27
+ 6d8:	96 ef       	ldi	r25, 0xF6	; 246
     _delay_us(50);
     LCD_WDATA = ch;               // put data
- 6e0:	9a 95       	dec	r25
- 6e2:	f1 f7       	brne	.-4      	; 0x6e0 <__LOCK_REGION_LENGTH__+0x2e0>
- 6e4:	80 81       	ld	r24, Z
- 6e6:	8e 7f       	andi	r24, 0xFE	; 254
- 6e8:	80 83       	st	Z, r24
+ 6da:	9a 95       	dec	r25
+ 6dc:	f1 f7       	brne	.-4      	; 0x6da <__LOCK_REGION_LENGTH__+0x2da>
+ 6de:	90 81       	ld	r25, Z
+ 6e0:	9e 7f       	andi	r25, 0xFE	; 254
+ 6e2:	90 83       	st	Z, r25
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 6ea:	ca 30       	cpi	r28, 0x0A	; 10
- 6ec:	10 f4       	brcc	.+4      	; 0x6f2 <__LOCK_REGION_LENGTH__+0x2f2>
- 6ee:	c0 5d       	subi	r28, 0xD0	; 208
- 6f0:	01 c0       	rjmp	.+2      	; 0x6f4 <__LOCK_REGION_LENGTH__+0x2f4>
- 6f2:	c9 5c       	subi	r28, 0xC9	; 201
- 6f4:	81 e0       	ldi	r24, 0x01	; 1
- 6f6:	06 c0       	rjmp	.+12     	; 0x704 <__LOCK_REGION_LENGTH__+0x304>
- 6f8:	e6 e6       	ldi	r30, 0x66	; 102
+ 6e4:	8a 30       	cpi	r24, 0x0A	; 10
+ 6e6:	10 f4       	brcc	.+4      	; 0x6ec <__LOCK_REGION_LENGTH__+0x2ec>
+ 6e8:	80 5d       	subi	r24, 0xD0	; 208
+ 6ea:	01 c0       	rjmp	.+2      	; 0x6ee <__LOCK_REGION_LENGTH__+0x2ee>
+ 6ec:	89 5c       	subi	r24, 0xC9	; 201
+ 6ee:	91 e0       	ldi	r25, 0x01	; 1
+ 6f0:	06 c0       	rjmp	.+12     	; 0x6fe <__LOCK_REGION_LENGTH__+0x2fe>
+ 6f2:	e6 e6       	ldi	r30, 0x66	; 102
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
     LCD_CTRL |= (1 << LCD_EN);    // E high
     _delay_us(50);
     LCD_WINST = command;          // put command
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 6fa:	fe e0       	ldi	r31, 0x0E	; 14
- 6fc:	31 97       	sbiw	r30, 0x01	; 1
+ 6f4:	fe e0       	ldi	r31, 0x0E	; 14
+ 6f6:	31 97       	sbiw	r30, 0x01	; 1
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 6fe:	f1 f7       	brne	.-4      	; 0x6fc <__LOCK_REGION_LENGTH__+0x2fc>
- 700:	00 00       	nop
- 702:	89 2f       	mov	r24, r25
- 704:	9f ef       	ldi	r25, 0xFF	; 255
- 706:	98 0f       	add	r25, r24
+ 6f8:	f1 f7       	brne	.-4      	; 0x6f6 <__LOCK_REGION_LENGTH__+0x2f6>
+ 6fa:	00 00       	nop
+ 6fc:	92 2f       	mov	r25, r18
+ 6fe:	2f ef       	ldi	r18, 0xFF	; 255
+ 700:	29 0f       	add	r18, r25
 }
 
 static inline void LCD_Delay(uint8_t ms)
 {
     while (ms--) _delay_ms(1);
- 708:	81 11       	cpse	r24, r1
- 70a:	f6 cf       	rjmp	.-20     	; 0x6f8 <__LOCK_REGION_LENGTH__+0x2f8>
- 70c:	e5 e6       	ldi	r30, 0x65	; 101
- 70e:	f0 e0       	ldi	r31, 0x00	; 0
- 710:	80 81       	ld	r24, Z
+ 702:	91 11       	cpse	r25, r1
+ 704:	f6 cf       	rjmp	.-20     	; 0x6f2 <__LOCK_REGION_LENGTH__+0x2f2>
+ 706:	e5 e6       	ldi	r30, 0x65	; 101
+ 708:	f0 e0       	ldi	r31, 0x00	; 0
+ 70a:	90 81       	ld	r25, Z
 static inline void LCD_Cursor_Shift(uint8_t p);
 static inline void LCD_Cursor_Home(void);
 
 static inline void LCD_Data(uint8_t ch)
 {
     LCD_CTRL |= (1 << LCD_RS);    // RS=1 -> data
- 712:	84 60       	ori	r24, 0x04	; 4
- 714:	80 83       	st	Z, r24
- 716:	80 81       	ld	r24, Z
- 718:	8d 7f       	andi	r24, 0xFD	; 253
- 71a:	80 83       	st	Z, r24
+ 70c:	94 60       	ori	r25, 0x04	; 4
+ 70e:	90 83       	st	Z, r25
+ 710:	90 81       	ld	r25, Z
+ 712:	9d 7f       	andi	r25, 0xFD	; 253
+ 714:	90 83       	st	Z, r25
     LCD_CTRL &= ~(1 << LCD_RW);   // RW=0 -> write
- 71c:	80 81       	ld	r24, Z
- 71e:	81 60       	ori	r24, 0x01	; 1
- 720:	80 83       	st	Z, r24
+ 716:	90 81       	ld	r25, Z
+ 718:	91 60       	ori	r25, 0x01	; 1
+ 71a:	90 83       	st	Z, r25
     LCD_CTRL |= (1 << LCD_EN);    // E high
- 722:	86 ef       	ldi	r24, 0xF6	; 246
- 724:	8a 95       	dec	r24
- 726:	f1 f7       	brne	.-4      	; 0x724 <__LOCK_REGION_LENGTH__+0x324>
+ 71c:	26 ef       	ldi	r18, 0xF6	; 246
+ 71e:	2a 95       	dec	r18
+ 720:	f1 f7       	brne	.-4      	; 0x71e <__LOCK_REGION_LENGTH__+0x31e>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 728:	cb bb       	out	0x1b, r28	; 27
- 72a:	96 ef       	ldi	r25, 0xF6	; 246
- 72c:	9a 95       	dec	r25
+ 722:	8b bb       	out	0x1b, r24	; 27
+ 724:	86 ef       	ldi	r24, 0xF6	; 246
+ 726:	8a 95       	dec	r24
     _delay_us(50);
     LCD_WDATA = ch;               // put data
- 72e:	f1 f7       	brne	.-4      	; 0x72c <__LOCK_REGION_LENGTH__+0x32c>
- 730:	80 81       	ld	r24, Z
- 732:	8e 7f       	andi	r24, 0xFE	; 254
- 734:	80 83       	st	Z, r24
+ 728:	f1 f7       	brne	.-4      	; 0x726 <__LOCK_REGION_LENGTH__+0x326>
+ 72a:	80 81       	ld	r24, Z
+ 72c:	8e 7f       	andi	r24, 0xFE	; 254
     _delay_us(50);
     LCD_CTRL &= ~(1 << LCD_EN);   // E low
- 736:	05 cf       	rjmp	.-502    	; 0x542 <__LOCK_REGION_LENGTH__+0x142>
+ 72e:	80 83       	st	Z, r24
+ 730:	cc 23       	and	r28, r28
+ 732:	09 f4       	brne	.+2      	; 0x736 <__LOCK_REGION_LENGTH__+0x336>
+			// LCD 업데이트
+			LCD_Pos(0,8); LCD_Char('0'); LCD_Char(hex1(in_nib));
+			LCD_Pos(1,8); LCD_Char('0'); LCD_Char(hex1(led));
+		}
+		else;
+		if(led_mode != 0x00) LED_PRINT(led_mode);
+ 734:	06 cf       	rjmp	.-500    	; 0x542 <__LOCK_REGION_LENGTH__+0x142>
+ 736:	8c 2f       	mov	r24, r28
+ 738:	20 dd       	rcall	.-1472   	; 0x17a <LED_PRINT>
+ 73a:	03 cf       	rjmp	.-506    	; 0x542 <__LOCK_REGION_LENGTH__+0x142>
 
-00000738 <_exit>:
- 738:	f8 94       	cli
+0000073c <_exit>:
+ 73c:	f8 94       	cli
 
-0000073a <__stop_program>:
- 73a:	ff cf       	rjmp	.-2      	; 0x73a <__stop_program>
+0000073e <__stop_program>:
+ 73e:	ff cf       	rjmp	.-2      	; 0x73e <__stop_program>

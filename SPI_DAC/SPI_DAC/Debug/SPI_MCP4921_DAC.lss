@@ -321,7 +321,7 @@ static void sin_table_Init(void)
  16a:	20 c0       	rjmp	.+64     	; 0x1ac <sin_table_Init+0x58>
 	{
 		// sin() : -1~1 이므로 단극성 0~2로 올리기
-		sin_table[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX/2.0)); // 0 -> 0, 1 -> 4095/2, 2 -> 4095
+		sin_table[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX/2.0)); 
  16c:	c1 2f       	mov	r28, r17
  16e:	d0 e0       	ldi	r29, 0x00	; 0
  170:	c7 01       	movw	r24, r14
@@ -344,6 +344,7 @@ static void sin_table_Init(void)
  192:	de 4f       	sbci	r29, 0xFE	; 254
  194:	79 83       	std	Y+1, r23	; 0x01
  196:	68 83       	st	Y, r22
+		// 0 -> 0, 1 -> 4095/2, 2 -> 4095
 		angle+=step;
  198:	2d ef       	ldi	r18, 0xFD	; 253
  19a:	3d ea       	ldi	r19, 0xAD	; 173
@@ -363,9 +364,9 @@ static void sin_table_Init(void)
  1aa:	1f 5f       	subi	r17, 0xFF	; 255
  1ac:	14 36       	cpi	r17, 0x64	; 100
  1ae:	f0 f2       	brcs	.-68     	; 0x16c <sin_table_Init+0x18>
-	{
 		// sin() : -1~1 이므로 단극성 0~2로 올리기
-		sin_table[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX/2.0)); // 0 -> 0, 1 -> 4095/2, 2 -> 4095
+		sin_table[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX/2.0)); 
+		// 0 -> 0, 1 -> 4095/2, 2 -> 4095
 		angle+=step;
 	}
 }
@@ -588,7 +589,6 @@ ISR(TIMER0_COMP_vect)
  332:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
  336:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
 	}
-	
 }
  33a:	ff 91       	pop	r31
  33c:	ef 91       	pop	r30

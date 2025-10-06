@@ -89,19 +89,16 @@ int main(void)
 			#endif
 			
 			led = (~in_nib)&0x0F; //눌림=0 -> LED ON(active-low 가정)
-			// 눌렸을 때만 led_mode를 설정하도록 함
 			if(led == 0x01)			{on_led = 0x0E; led_mode=led;} // 왼쪽 shift
 			else if(led == 0x02)	{on_led = 0x07; led_mode=led;} // 오른쪽 shift
 			else if(led == 0x04)	{on_led = 0x0F; led_mode=led;} // 전체 toggle 
 			else if(led == 0x08)	{on_led = 0x03; led_mode=led;} // 2개씩 교대 점멸
-			
-			if(led_mode != 0x00) LED_PRINT(led_mode);
-			
-
+			// 눌렸을 때만 led_mode를 설정하도록 함
 			// LCD 업데이트
 			LCD_Pos(0,8); LCD_Char('0'); LCD_Char(hex1(in_nib));
 			LCD_Pos(1,8); LCD_Char('0'); LCD_Char(hex1(led));
 		}
 		else;
+		if(led_mode != 0x00) LED_PRINT(led_mode);
 	}
 }
